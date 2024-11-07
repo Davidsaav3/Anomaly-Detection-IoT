@@ -6,7 +6,7 @@
         "mqttQeue": "mqtt://eu1.cloud.thethings.network:1883"
     },
     "flatten": {},
-
+ 
     "expandedColumn": {
         "expandedValue": "#fill#"
     },
