@@ -17,6 +17,7 @@
     "papaparse": "^5.5.1"
   },
   "scripts": {
+<<<<<<< HEAD
     "x waterInfrastructure 0.1 - dataDispersion": "node   ./processing/dataDispersion.js   ./results/waterInfrastructure/waterInfrastructure.csv   ./results/waterInfrastructure/dataDispersion.csv   20   ./exec/waterConfig.json",
     "waterInfrastructure X 1.1 - joinColumn": "node   ./processing/joinColumn.js   ./results/waterInfrastructure/waterInfrastructure.csv   ./results/waterInfrastructure/joinColumn.csv   ./exec/waterConfig.json",
     "waterInfrastructure 1.2 - deleteColumn": "node   ./processing/deleteColumn.js   ./results/waterInfrastructure/waterInfrastructure.csv   ./results/waterInfrastructure/deleteColumn.csv   ./exec/waterConfig.json",
@@ -29,6 +30,43 @@
     "waterInfrastructure 3.4 - deleteTruth": "node   ./processing/deleteTruth.js   ./results/waterInfrastructure/nulls.csv   ./results/waterInfrastructure/deleteTruth.csv   ./exec/waterConfig.json",
     "waterInfrastructure 4.1 - createGroups": "node   ./processing/createGroups.js   ./results/waterInfrastructure/nulls.csv   ./results/waterInfrastructure/createGroups   ./exec/waterConfig.json",
     "waterInfrastructure - index": "node ./models/isolationForest/index.js ./results/waterInfrastructure/deleteTruth.csv ./results/waterInfrastructure/nulls.csv ./results/waterInfrastructure/auxiliaryWeight.csv 1 10 ./results/waterInfrastructure/result/ isolation.csv scores.csv metrics.csv image ./exec/waterConfig.json"
+=======
+    "sensorsExpanded 1 - acquisition": "node   ./processing/acquisition.js   ./results/sensorsExpanded/acquisition.json   ./exec/sensorsConfig.json",
+    "sensorsExpanded 2 - flatten": "node   ./processing/flatten.js   ./results/sensorsExpanded/acquisition.json   ./results/sensorsExpanded/flatten.json   ./exec/sensorsConfig.json",
+    
+    "sensorsExpanded 3 - expandedColumn": "node   ./processing/expandedColumn.js   ./results/sensorsExpanded/flatten.json   ./results/sensorsExpanded/expandedColumn.json   ./exec/sensorsConfig.json",
+    
+    "sensorsExpanded 5 - toCsv": "node   ./processing/toCsv.js   ./results/sensorsExpanded/expandedColumn.json   ./results/sensorsExpanded/toCsv.csv   ./exec/sensorsConfig.json",
+      "sensorsExpanded 5.1 - createGroups": "node   ./processing/createGroups.js   ./results/sensorsExpanded/toCsv.csv   ./results/sensorsExpanded/createGroups   ./exec/sensorsConfig.json",
+    "sensorsExpanded 6 - encoding": "node   ./processing/encoding.js   ./results/sensorsExpanded/toCsv.csv   ./results/sensorsExpanded/auxiliaryDictionary.csv    ./results/sensorsExpanded/encoding.csv   ./exec/sensorsConfig.json",
+
+    "sensorsExpanded 7 - createTemplate": "node   ./processing/createTemplate.js   ./results/sensorsExpanded/encoding.csv   ./results/sensorsExpanded/auxiliaryNulls.csv   ./results/sensorsExpanded/auxiliaryNormalize.csv   ./exec/sensorsConfig.json",
+    "sensorsExpanded 8 - nulls": "node   ./processing/nulls.js   ./results/sensorsExpanded/encoding.csv   ./results/sensorsExpanded/auxiliaryNulls.csv   ./results/sensorsExpanded/nulls.csv    ./exec/sensorsConfig.json",
+    "sensorsExpanded 9 - normalize": "node   ./processing/normalize.js   ./results/sensorsExpanded/nulls.csv   ./results/sensorsExpanded/auxiliaryNormalize.csv    ./results/sensorsExpanded/normalize.csv   ./results/sensorsExpanded/auxiliaryMaxMin.csv   ./exec/sensorsConfig.json",
+    
+    "sensorsExpanded 10 - addColumn": "node   ./processing/addColumn.js   ./results/sensorsExpanded/normalize.csv   ./results/sensorsExpanded/addColumn.csv   ./results/sensorsExpanded/auxiliaryWeight.csv   ./exec/sensorsConfig.json",
+    
+    "sensorsExpanded 11 - index": "node ./models/isolationForest/index.js ./results/sensorsExpanded/normalize.csv ./results/sensorsExpanded/addColumn.csv ./results/sensorsExpanded/auxiliaryWeight.csv 25 ./results/sensorsExpanded/result/ isolation.csv scores.csv metrics.csv image ./exec/sensorsConfig.json",
+  
+
+
+    "sensorsReduce 1 - acquisition": "node   ./processing/acquisition.js   ./results/sensorsReduce/acquisition.json   ./exec/sensorsConfig.json",
+    "sensorsReduce 2 - flatten": "node   ./processing/flatten.js   ./results/sensorsReduce/acquisition.json   ./results/sensorsReduce/flatten.json   ./exec/sensorsConfig.json",
+    
+    "sensorsReduce 4 - reduceColumn": "node   ./processing/reduceColumn.js   ./results/sensorsReduce/flatten.json   ./results/sensorsReduce/reduceColumn.json   ./exec/sensorsConfig.json",
+    
+    "sensorsReduce 5 - toCsv": "node   ./processing/toCsv.js   ./results/sensorsReduce/reduceColumn.json   ./results/sensorsReduce/toCsv.csv   ./exec/sensorsConfig.json",
+      "sensorsReduce 5.1 - createGroups": "node   ./processing/createGroups.js   ./results/sensorsExpanded/toCsv.csv   ./results/sensorsReduce/createGroups  ./exec/sensorsConfig.json",
+    "sensorsReduce 6 - encoding": "node   ./processing/encoding.js   ./results/sensorsReduce/toCsv.csv   ./results/sensorsReduce/auxiliaryDictionary.csv    ./results/sensorsReduce/encoding.csv   ./exec/sensorsConfig.json",
+  
+    "sensorsReduce 7 - createTemplate": "node   ./processing/createTemplate.js   ./results/sensorsReduce/encoding.csv   ./results/sensorsReduce/auxiliaryNulls.csv   ./results/sensorsReduce/auxiliaryNormalize.csv   ./exec/sensorsConfig.json",
+    "sensorsReduce 8 - nulls": "node   ./processing/nulls.js   ./results/sensorsReduce/encoding.csv   ./results/sensorsReduce/auxiliaryNulls.csv   ./results/sensorsReduce/nulls.csv    ./exec/sensorsConfig.json",
+    "sensorsReduce 9 - normalize": "node   ./processing/normalize.js   ./results/sensorsReduce/nulls.csv   ./results/sensorsReduce/auxiliaryNormalize.csv    ./results/sensorsReduce/normalize.csv   ./results/sensorsReduce/auxiliaryMaxMin.csv   ./exec/sensorsConfig.json",
+    
+    "sensorsReduce 10 - addColumn": "node   ./processing/addColumn.js   ./results/sensorsReduce/normalize.csv   ./results/sensorsReduce/addColumn.csv   ./results/sensorsReduce/auxiliaryWeight.csv   ./exec/sensorsConfig.json",
+    
+    "sensorsReduce 11 - index": "node ./models/isolationForest/index.js ./results/sensorsReduce/normalize.csv ./results/sensorsReduce/addColumn.csv ./results/sensorsReduce/auxiliaryWeight.csv 25 ./results/sensorsReduce/result/ isolation.csv scores.csv metrics.csv image ./exec/sensorsConfig.json"
+>>>>>>> 6d5da5e131bd5d04b68d07beb4041aca797761b4
   },
   "keywords": [
     "isolation-forest",

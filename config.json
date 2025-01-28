@@ -22,7 +22,12 @@
             0
         ]
     },
-
+    "flatten": {},
+ 
+    "expandedColumn": {
+        "expandedValue": "#fill#"
+    },
+    "reduceColumn": {},
 
     "encoding": {
         "expandedValue": "#fill#",
