@@ -71,4 +71,7 @@ node   ./processing/select.js
 
 node   ./processing/createGroups.js   ./results/iot/normalize.csv   ./results/iot/createGroups   ./exec/config.json
 
-node ../models/isolationForest/index.js ../results/!treesFolder!/deleteTruth.csv ../results/!treesFolder!/nulls.csv ../results/!treesFolder!/auxiliaryWeight.csv 1 20 ../results/!treesFolder!/!iterFolder!/ isolation.csv scores.csv metrics.csv image ./waterConfig.json
+node ./models/isolationForest/index.js ./results/groups4/conexion/deleteTruth.csv ./results/groups4/conexion/nulls.csv ./results/groups4/conexion/auxiliaryWeight.csv 1 20 ./results/groups4/conexion/it1/ isolation.csv scores.csv metrics.csv image ./config.json
+
+------------------
+

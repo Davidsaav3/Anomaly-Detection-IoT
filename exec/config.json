@@ -114,7 +114,7 @@
         "threshold": 0.6,
         "anomalyThreshold": 0.01,
         "treesIncrement": 1,
-        "score": 25,
+        "score": 9078,
         "valueY": 1,
         "valueX": "month_day_hour_min",
         "columnName": "truth"
