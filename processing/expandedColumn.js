@@ -1,5 +1,10 @@
 const fs = require('fs');
 const args = process.argv.slice(2);
+if (args.length === 1 && (args[0] === '-c' || args[0] === '-C')) {
+  console.log(`input:1,output:1,config:1`);
+  console.log(`./results/sensorsExpanded/flatten.json   ./results/sensorsExpanded/expandedColumn.json   ./exec/sensorsConfig.json`);
+  process.exit(0);
+}
 const configPath = args[2] ? args[2] : './config.json';
 let config = {};
 

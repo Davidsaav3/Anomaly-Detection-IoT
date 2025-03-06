@@ -4,6 +4,11 @@ const csv = require('csv-parser');
 
 // [ OBTENER PARÁMETROS ]
 const args = process.argv.slice(2);
+if (args.length === 1 && (args[0] === '-c' || args[0] === '-C')) {
+  console.log(`input:1,output:2,config:1`);
+  console.log(`./results/sensorsExpanded/toCsv.csv   ./results/sensorsExpanded/createGroups   ./exec/sensorsConfig.json`);
+  process.exit(0);
+}
 if (args.length < 2) {
   console.error('! ERROR: INPUT !');
   process.exit(1);

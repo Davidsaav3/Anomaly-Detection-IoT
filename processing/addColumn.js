@@ -3,6 +3,11 @@ const csv = require('csv-parser');
 
 // [ OBTENER PARÁMETROS ]
 const args = process.argv.slice(2);
+if (args.length === 1 && (args[0] === '-c' || args[0] === '-C')) {
+  console.log(`input:1,output:2,config:1`);
+  console.log(`./results/sensorsReduce/normalize.csv   ./results/sensorsReduce/addColumn.csv   ./results/sensorsReduce/auxiliaryWeight.csv   ./exec/sensorsConfig.json`);
+  process.exit(0);
+}
 if (args.length < 3) {
   console.error('! ERROR: INPUT !');
   process.exit(1);

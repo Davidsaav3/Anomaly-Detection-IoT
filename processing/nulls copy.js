@@ -3,6 +3,11 @@ const csv = require('csv-parser');
 
 // [ EJECUTAR PROCESO Y GUARDAR RESULTADOS ]
 const args = process.argv.slice(2);
+if (args.length === 1 && (args[0] === '-c' || args[0] === '-C')) {
+  console.log(`input:2,output:1,config:1`);
+  console.log(`./results/sensorsExpanded/encoding.csv   ./results/sensorsExpanded/auxiliaryNulls.csv   ./results/sensorsExpanded/nulls.csv    ./exec/sensorsConfig.json`);
+  process.exit(0);
+}
 if (args.length !== 4) {
   console.error('! ERROR: INPUT !');
   process.exit(1);
