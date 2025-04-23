@@ -1,0 +1,105 @@
+{
+  "createGroups": {
+    "groups": [
+      {
+        "output": "function_level",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "truth"
+        ]
+      },
+      {
+        "output": "function_drive",
+        "fields": [
+          "i_uiip",
+          "p_uiip",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "function_pressure",
+        "fields": [
+          "p_f",
+          "p_pu",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "function_flow",
+        "fields": [
+          "ce_px",
+          "cs_px",
+          "c_pu_p",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "position_plaXiquet",
+        "fields": [
+          "n_px",
+          "n_p",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "position_playa",
+        "fields": [
+          "n_px",
+          "n_p",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "position_falcon",
+        "fields": [
+          "n_px",
+          "n_p",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      },
+      {
+        "output": "position_pueblo",
+        "fields": [
+          "i_uiipu",
+          "p_pu",
+          "c_pu_p",
+          "n_px",
+          "n_p",
+          "month",
+          "day",
+          "hour",
+          "min"
+        ]
+      }
+    ]
+  },
+  "responseTime": 13.451,
+  "validation": {
+    "isValid": false,
+    "errors": [
+      "CARACTERÍSTICAS SIN ASIGNAR: i_f"
+    ],
+    "coverage": 93.75
+  }
+}
