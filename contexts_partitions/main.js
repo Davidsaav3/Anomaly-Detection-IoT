@@ -62,7 +62,7 @@ async function main() {
     await fs.writeFile(outputPath, JSON.stringify(results, null, 2));
 
     // MENSAJES DE SALIDA
-    console.log(`TIME=${responseTime}s, ${validation.isValid ? "VALID" : "INVALID"}, ASSIGNMENTRATE=${validation.assignmentRate}%`);
+    console.log(`TIME=${responseTime}s,   ${validation.isValid ? "VALID" : "INVALID"},   ASSIGNMENT RATE=${validation.assignmentRate}%`);
   } 
   catch (e) {
     console.error("ERROR:", e.message);

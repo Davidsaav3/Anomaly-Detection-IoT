@@ -2,54 +2,118 @@
   "createGroups": {
     "groups": [
       {
-        "output": "TiempoRecoleccion",
+        "output": "time_series",
         "fields": [
           "month",
           "day",
           "hour",
-          "min"
+          "min",
+          "truth"
         ]
       },
       {
-        "output": "Posicion",
+        "output": "location_x",
         "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
           "n_px",
-          "n_p"
-        ]
-      },
-      {
-        "output": "Corrientes",
-        "fields": [
-          "i_uiip",
-          "i_f",
-          "i_uiipu"
-        ]
-      },
-      {
-        "output": "Presiones",
-        "fields": [
-          "p_uiip",
-          "p_f",
-          "p_pu"
-        ]
-      },
-      {
-        "output": "Flujos",
-        "fields": [
           "ce_px",
           "cs_px",
-          "c_pu_p"
+          "truth"
         ]
       },
       {
-        "output": "Anomalias",
+        "output": "location_playa",
         "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "n_p",
+          "truth"
+        ]
+      },
+      {
+        "output": "function_current",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "i_uiip",
+          "i_f",
+          "i_uiipu",
+          "truth"
+        ]
+      },
+      {
+        "output": "function_pressure",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "p_uiip",
+          "p_f",
+          "p_pu",
+          "truth"
+        ]
+      },
+      {
+        "output": "function_flow",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "ce_px",
+          "cs_px",
+          "c_pu_p",
+          "truth"
+        ]
+      },
+      {
+        "output": "location_drive",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "i_uiip",
+          "p_uiip",
+          "truth"
+        ]
+      },
+      {
+        "output": "location_final",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "i_f",
+          "p_f",
+          "truth"
+        ]
+      },
+      {
+        "output": "location_pueblo",
+        "fields": [
+          "month",
+          "day",
+          "hour",
+          "min",
+          "i_uiipu",
+          "p_pu",
+          "c_pu_p",
           "truth"
         ]
       }
     ]
   },
-  "responseTime": 3.785,
+  "responseTime": 7.83,
   "validation": {
     "isValid": true,
     "errors": [],
