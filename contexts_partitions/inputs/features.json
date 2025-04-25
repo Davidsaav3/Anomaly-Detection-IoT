@@ -1,20 +1,100 @@
 {
-    "features": [
-      { "name": "month", "description": "Mes de recolección", "type": "integer", "unit": "mes" },
-      { "name": "day", "description": "Día de recolección", "type": "integer", "unit": "día" },
-      { "name": "hour", "description": "Hora de recolección", "type": "integer", "unit": "hora" },
-      { "name": "min", "description": "Minuto de recolección", "type": "integer", "unit": "minuto" },
-      { "name": "n_px", "description": "Posición X", "type": "float", "unit": "unidades" },
-      { "name": "n_p", "description": "Posición", "type": "float", "unit": "unidades" },
-      { "name": "i_uiip", "description": "Corriente drive", "type": "float", "unit": "amperios" },
-      { "name": "i_f", "description": "Corriente final", "type": "float", "unit": "amperios" },
-      { "name": "i_uiipu", "description": "Corriente pueblo", "type": "float", "unit": "amperios" },
-      { "name": "p_uiip", "description": "Presión drive", "type": "float", "unit": "pascal" },
-      { "name": "p_f", "description": "Presión final", "type": "float", "unit": "pascal" },
-      { "name": "p_pu", "description": "Presión pueblo", "type": "float", "unit": "pascal" },
-      { "name": "ce_px", "description": "Flujo X", "type": "float", "unit": "litros/segundo" },
-      { "name": "cs_px", "description": "Flujo secundario X", "type": "float", "unit": "litros/segundo" },
-      { "name": "c_pu_p", "description": "Flujo pueblo", "type": "float", "unit": "litros/segundo" },
-      { "name": "truth", "description": "Verdad de anomalías", "type": "boolean", "unit": "N/A" }
-    ]
-  }
+  "features": [
+    {
+      "name": "month",
+      "description": "Mes de recolección",
+      "type": "integer",
+      "unit": "mes"
+    },
+    {
+      "name": "day",
+      "description": "Día de recolección",
+      "type": "integer",
+      "unit": "día"
+    },
+    {
+      "name": "hour",
+      "description": "Hora de recolección",
+      "type": "integer",
+      "unit": "hora"
+    },
+    {
+      "name": "min",
+      "description": "Minuto de recolección",
+      "type": "integer",
+      "unit": "minuto"
+    },
+    {
+      "name": "n_px",
+      "description": "Posición X",
+      "type": "float",
+      "unit": "unidades"
+    },
+    {
+      "name": "n_p",
+      "description": "Posición",
+      "type": "float",
+      "unit": "unidades"
+    },
+    {
+      "name": "i_uiip",
+      "description": "Corriente drive",
+      "type": "float",
+      "unit": "amperios"
+    },
+    {
+      "name": "i_f",
+      "description": "Corriente final",
+      "type": "float",
+      "unit": "amperios"
+    },
+    {
+      "name": "i_uiipu",
+      "description": "Corriente pueblo",
+      "type": "float",
+      "unit": "amperios"
+    },
+    {
+      "name": "p_uiip",
+      "description": "Presión drive",
+      "type": "float",
+      "unit": "pascal"
+    },
+    {
+      "name": "p_f",
+      "description": "Presión final",
+      "type": "float",
+      "unit": "pascal"
+    },
+    {
+      "name": "p_pu",
+      "description": "Presión pueblo",
+      "type": "float",
+      "unit": "pascal"
+    },
+    {
+      "name": "ce_px",
+      "description": "Flujo X",
+      "type": "float",
+      "unit": "litros/segundo"
+    },
+    {
+      "name": "cs_px",
+      "description": "Flujo secundario X",
+      "type": "float",
+      "unit": "litros/segundo"
+    },
+    {
+      "name": "c_pu_p",
+      "description": "Flujo pueblo",
+      "type": "float",
+      "unit": "litros/segundo"
+    },
+    {
+      "name": "truth",
+      "description": "Verdad de anomalías",
+      "type": "boolean",
+      "unit": "N/A"
+    }
+  ]
+}

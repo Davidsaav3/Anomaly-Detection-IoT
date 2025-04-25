@@ -4,154 +4,71 @@ const path = require("path");
 const promp = require("./promp");
 require("dotenv").config();
 
+
 // CONFIGURACIÓN DE GEMINI API
 const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-if (!process.env.GEMINI_API_KEY) {
-  console.error("ERROR: GEMINI_API_KEY no está configurado en el archivo .env");
-  process.exit(1);
+if (!process.env.GEMINI_API_KEY) throw new Error("FALTA GEMINI_API_KEY");
+
+
+// LLAMA A GEMINI API Y VALIDA SALIDA
+async function generateAndValidate(query, features) {
+  const start = Date.now();
+  const { text } = await genAI.models.generateContent(query);
+  const responseTime = (Date.now() - start) / 1000;
+
+  // EXTRAER JSON DE LA RESPUESTA
+  const jsonMatch = text.match(/```json\n([\s\S]*?)\n```/)?.[1] || text;
+  let output;
+  try {
+    output = JSON.parse(jsonMatch.trim());
+  } 
+  catch (e) {
+    console.error("ERROR AL PARSEAR JSON:", e.message);
+    throw new Error("RESPUESTA NO ES JSON VÁLIDO");
+  }
+
+  // VALIDAR ASIGNACIÓN DE CARACTERÍSTICAS
+  const assigned = new Set(output.createGroups.groups.flatMap(g => g.fields));
+  const validation = {
+    isValid: assigned.size === features.length,
+    errors: assigned.size !== features.length 
+      ? [`FALTAN: ${features.filter(f => !assigned.has(f.name)).map(f => f.name).join(", ")}`] 
+      : [],
+    assignmentRate: (assigned.size / features.length) * 100
+  };
+
+  return { output, responseTime, validation };
 }
 
-// LLAMA A GEMINI API
-const generateContextsAndPartitions = async (query) => {
-  try {
-    const start = Date.now();
-    const response = await genAI.models.generateContent(query);
-    const responseTime = (Date.now() - start) / 1000;
-
-    let responseText = response.text.trim();
-    const jsonMatch = responseText.match(/```json\n([\s\S]*?)\n```/);
-    if (jsonMatch && jsonMatch[1]) {
-      responseText = jsonMatch[1].trim();
-    }
-
-    let output;
-    try {
-      output = JSON.parse(responseText);
-    } catch (parseError) {
-      console.error("ERROR AL PARSEAR JSON:", parseError.message);
-      console.error("RESPUESTA CRUDA:", responseText);
-      throw new Error("La respuesta de la API no es JSON válido");
-    }
-
-    return { output, responseTime };
-  } catch (e) {
-    console.error("ERROR EN GEMINI API:", e.message);
-    throw e;
-  }
-};
-
-// VALIDA SALIDA
-const validateOutput = async (output, features) => {
-  const validation = { isValid: true, errors: [], coverage: 0 };
-
-  // VERIFICA ASIGNACIÓN DE CARACTERÍSTICAS
-  const assigned = new Set(output.createGroups.groups.flatMap((g) => g.fields));
-  validation.coverage = (assigned.size / features.length) * 100;
-
-  if (assigned.size !== features.length) {
-    validation.isValid = false;
-    const missing = features.filter((f) => !assigned.has(f.name)).map((f) => f.name);
-    validation.errors.push(`CARACTERÍSTICAS SIN ASIGNAR: ${missing.join(", ")}`);
-  }
-
-  // OBTIENE CONTEXTOS ESPERADOS DESDE manual.json
-  let expected;
-  try {
-    const manualData = await fs.readFile("inputs/manual.json", "utf-8");
-    const manualResults = JSON.parse(manualData);
-    expected = manualResults.createGroups.groups.map((g) => g.output);
-  } catch (e) {
-    console.error("ERROR AL LEER manual.json PARA VALIDACIÓN:", e.message);
-    throw new Error("No se pudo cargar manual.json para obtener contextos esperados");
-  }
-
-  const actual = output.createGroups.groups.map((g) => g.output);
-  const missingContexts = expected.filter((ctx) => !actual.includes(ctx));
-  if (missingContexts.length > 0) {
-    validation.isValid = false;
-    validation.errors.push(`FALTAN CONTEXTOS: ${missingContexts.join(", ")}`);
-  }
-
-  return validation;
-};
-
-// COMPARA CON RESULTADOS MANUALES
-const compareWithManual = (generated, manual) => {
-  let correct = 0,
-    total = 0;
-  generated.createGroups.groups.forEach((g) => {
-    const m = manual.createGroups.groups.find((m) => m.output === g.output);
-    if (m) {
-      g.fields.forEach((f) => {
-        total++;
-        if (m.fields.includes(f)) correct++;
-      });
-    }
-  });
-  return { precision: total > 0 ? (correct / total) * 100 : 0, correct, total };
-};
 
 // EJECUCIÓN PRINCIPAL
 async function main() {
   try {
-    // CREA DIRECTORIO results SI NO EXISTE
-    const resultsDir = "outputs";
-    try {
-      await fs.mkdir(resultsDir, { recursive: true });
-    } catch (e) {
-      console.error("ERROR AL CREAR DIRECTORIO results:", e.message);
-      throw new Error("No se pudo crear el directorio results");
-    }
+    // CREAR DIRECTORIO RESULTS
+    await fs.mkdir(process.env.OUTPUT_DIR, { recursive: true });
 
-    // LEE CONFIGURACIÓN IoT
-    let features;
-    try {
-      const configData = await fs.readFile("inputs/features.json", "utf-8");
-      features = JSON.parse(configData);
-    } catch (e) {
-      console.error("ERROR AL LEER features.json:", e.message);
-      throw new Error("No se pudo cargar el archivo features.json");
-    }
+    // LEER CONFIGURACIÓN Y RESULTADOS MANUALES
+    const [features, manual] = await Promise.all([
+      fs.readFile(process.env.FEATURES_FILE_PATH, "utf-8").then(JSON.parse),
+      fs.readFile(process.env.MANUAL_FILE_PATH, "utf-8").then(JSON.parse)
+    ]);
 
-    // LEE RESULTADOS MANUALES DE manual.json
-    let manualResults;
-    try {
-      const manualData = await fs.readFile("inputs/manual.json", "utf-8");
-      manualResults = JSON.parse(manualData);
-    } catch (e) {
-      console.error("ERROR AL LEER manual.json:", e.message);
-      throw new Error("No se pudo cargar el archivo manual.json");
-    }
+    // GENERAR, VALIDAR Y COMPARAR
+    const { output, responseTime, validation } = await generateAndValidate(promp(features.features), features.features);
 
-    // CREA Y EJECUTA CONSULTA
-    const { output, responseTime } = await generateContextsAndPartitions(promp(features.features));
+    // GUARDAR RESULTADOS
+    const results = { createGroups: output.createGroups, responseTime, validation };
+    const outputPath = path.join(process.env.OUTPUT_DIR, process.env.AUTOMATIC_OUTPUT_FILE);
+    await fs.writeFile(outputPath, JSON.stringify(results, null, 2));
 
-    // VALIDA
-    const validation = await validateOutput(output, features.features);
-
-    // GUARDA RESULTADOS
-    const results = {
-      createGroups: output.createGroups,
-      responseTime,
-      validation,
-    };
-    await fs.writeFile(path.join(resultsDir, "automatic.json"), JSON.stringify(results, null, 2));
-
-    // COMPARA CON MANUAL
-    results.comparison = compareWithManual(output, manualResults);
-
-    // RESUMEN
-    console.log(
-      `TIME=${responseTime}s, IS_VALID=${validation.isValid ? "VALID" : "INVALID"}, COVERAGE=${
-        validation.coverage
-      }%, PRECISION=${results.comparison.precision}%`
-    );
-    await fs.writeFile(path.join(resultsDir, "automatic_final.json"), JSON.stringify(results, null, 2));
-  } catch (e) {
-    console.error("ERROR PRINCIPAL:", e.message);
+    // MENSAJES DE SALIDA
+    console.log(`TIME=${responseTime}s, ${validation.isValid ? "VALID" : "INVALID"}, ASSIGNMENTRATE=${validation.assignmentRate}%`);
+  } 
+  catch (e) {
+    console.error("ERROR:", e.message);
     process.exit(1);
   }
 }
 
-// INICIA EJECUCIÓN
+
 main();

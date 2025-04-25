@@ -1,12 +1,9 @@
 module.exports = (features) => ({
     model: "gemini-1.5-pro",
-    contents: `Genera contextos y particiones para estas características IoT:
-    ${JSON.stringify(features, null, 2)}
-    Ejemplo:
-    {"createGroups":{"groups":[{"output":"function_level","fields":["month","day","hour","min","n_px","n_p","truth"]}]}}
-    Requisitos:
-    1. Contextos: function_level, function_drive, function_pressure, function_flow, position_plaXiquet, position_playa, position_falcon, position_pueblo
-    2. Cada característica en al menos un contexto
-    3. Posibles asignaciones múltiples
-    4. Formato JSON: { createGroups: { groups: [{ output, fields: [] }] } }`,
+    contents: `
+    Genera contextos y particiones para las siguientes características de una infraestructura IoT. Cada característica debe estar incluida en al menos un contexto, y se permite que una misma característica forme parte de múltiples contextos si es necesario
+    Los nombres de los contextos deben ser únicos y descriptivos, y no deben contener caracteres especiales o espacios. 
+    Los nombres de los contextos y particiones que crees deben estar en el idioma que estan las características.    
+    CARACTERÍSTICAS: ${JSON.stringify(features, null, 2)}
+    FORMATO SALIDA JSON: { createGroups: { groups: [{ output, fields: [] }] } }`,
   });

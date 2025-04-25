@@ -2,104 +2,57 @@
   "createGroups": {
     "groups": [
       {
-        "output": "function_level",
+        "output": "TiempoRecoleccion",
         "fields": [
           "month",
           "day",
           "hour",
-          "min",
-          "truth"
+          "min"
         ]
       },
       {
-        "output": "function_drive",
+        "output": "Posicion",
+        "fields": [
+          "n_px",
+          "n_p"
+        ]
+      },
+      {
+        "output": "Corrientes",
         "fields": [
           "i_uiip",
-          "p_uiip",
-          "month",
-          "day",
-          "hour",
-          "min"
+          "i_f",
+          "i_uiipu"
         ]
       },
       {
-        "output": "function_pressure",
+        "output": "Presiones",
         "fields": [
+          "p_uiip",
           "p_f",
-          "p_pu",
-          "month",
-          "day",
-          "hour",
-          "min"
+          "p_pu"
         ]
       },
       {
-        "output": "function_flow",
+        "output": "Flujos",
         "fields": [
           "ce_px",
           "cs_px",
-          "c_pu_p",
-          "month",
-          "day",
-          "hour",
-          "min"
+          "c_pu_p"
         ]
       },
       {
-        "output": "position_plaXiquet",
+        "output": "Anomalias",
         "fields": [
-          "n_px",
-          "n_p",
-          "month",
-          "day",
-          "hour",
-          "min"
-        ]
-      },
-      {
-        "output": "position_playa",
-        "fields": [
-          "n_px",
-          "n_p",
-          "month",
-          "day",
-          "hour",
-          "min"
-        ]
-      },
-      {
-        "output": "position_falcon",
-        "fields": [
-          "n_px",
-          "n_p",
-          "month",
-          "day",
-          "hour",
-          "min"
-        ]
-      },
-      {
-        "output": "position_pueblo",
-        "fields": [
-          "i_uiipu",
-          "p_pu",
-          "c_pu_p",
-          "n_px",
-          "n_p",
-          "month",
-          "day",
-          "hour",
-          "min"
+          "truth"
         ]
       }
     ]
   },
-  "responseTime": 13.451,
+  "responseTime": 3.785,
   "validation": {
-    "isValid": false,
-    "errors": [
-      "CARACTERÍSTICAS SIN ASIGNAR: i_f"
-    ],
-    "coverage": 93.75
+    "isValid": true,
+    "errors": [],
+    "assignmentRate": 100
   }
 }
